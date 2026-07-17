@@ -1,0 +1,252 @@
+\input{./页面配置文件.tex}
+
+\begin{document}
+	
+	{
+		\renewcommand\arraystretch{2}
+		\noindent 
+		\begin{tabular}{|c|c|}
+			\hline
+			\fangsong\hspace{0.5em}评阅人\hspace{0.5em} & \hspace{6em} \\ 
+			\hline
+		\end{tabular}
+		\hfill 
+		\begin{tabular}{|c|c|}
+			\hline
+			\fangsong 实验成绩 & \hspace{6em} \\ 
+			\hline
+		\end{tabular}
+	}
+	\renewcommand\arraystretch{1} 
+	\vspace{2em}
+	
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{csu_logo.png} 
+	\end{center}
+	
+	\vspace{0.5em}
+	
+	\begin{center}
+		\parbox{12.86cm}{
+			\centering\heiti\zihao{0}\scalebox{0.6}[1]{
+				自
+				动
+				化
+				学
+				院
+				本
+				科
+				生
+				实
+				验
+				报
+				告
+			}
+		}
+	\end{center}
+	\vspace{0.5em}
+	
+	\begin{center}
+		\kaishu\bfseries\zihao{-2}
+		\underline{\hspace{2em}电机拖动与运动控制系统\hspace{2em}}课程实验报告
+	\end{center}
+	\vspace{0.5em}
+	
+	\begin{center}
+		\fangsong\zihao{4}
+		专业\underline{自动化卓越人才培养}
+		班级\underline{自动化T2301}
+		姓名\underline{马志远}
+		学号\underline{8210232303}
+		
+		\vspace{0.5em}
+		
+		预定时间\underline{\zihao{5}6月6日}
+		星期\underline{\zihao{5}六}
+		节次\underline{\zihao{5}9,10节}
+		实际实验时间\underline{\zihao{5}6月6日}
+		星期\underline{\zihao{5}六}
+		节次\underline{\zihao{5}9,10节}
+		
+		\vspace{0.5em}
+		
+		地点\underline{\hspace{0.5em}信息楼102\hspace{0.5em}}
+		台号\underline{\hspace{0.5em}\hspace{2em}}
+		授课教师\underline{\hspace{0.5em}殷泽阳\hspace{0.5em}}
+		指导教师\underline{\hspace{0.5em}殷泽阳\hspace{0.5em}}
+	\end{center}
+	
+	\vspace{0.5em}
+	
+	\begin{framed} 
+		{\songti\zihao{-4}
+			
+			\begin{center}
+				{\heiti\zihao{3}
+					{实验名称：\underline{\hspace{0.5em}实验四、三相绕线式异步电动机工作特性实验\hspace{0.5em}}}
+				}
+			\end{center}
+			
+			\section{实验内容、目的与要求}
+			\begin{enumerate}
+				\item 熟悉异步电机的基础构造原理以及气隙旋转磁场的形成机制。
+				\item 深入理解该类电机的工作逻辑与机械特性，并熟练掌握其启动、速度调节及制动控制的多种策略、技术优势与实际应用场景。
+				\item 具备运用四象限机械特性图对电机不同运行工况进行科学剖析的能力。
+			\end{enumerate}
+			
+			\section{实验方法}
+			此次实验所依托的核心硬件平台与测量仪器涵盖如下部分：
+			\begin{itemize}
+				\item 3\textsuperscript{\#}机组：包含作为被测对象的三相绕线式异步电动机 M3 与充当机械负载的直流发电机 G3。
+				\item 交流供电及检测单元：涵盖三相调压器，以及用于采集交流电压、电流和功率数据的 MK06 智能测控仪表模块、MK03 交流电压表与 MK04 交流电流表。
+				\item 直流供电及检测单元：包含 MK01 直流电压表模块、MK02 直流电流表模块，外加为 G3 提供励磁的直流稳压电源。
+				\item 负载调节与控制组件：涉及 MK07 交流并网及切换开关模块、三相可调电阻负载 $R_1 \sim R_9$ 以及单相可调电阻负载 $R_W$。
+			\end{itemize}
+			
+			\subsection{三相绕线式异步电动机启动与调速}
+			若在额定电压条件下直接启动三相异步电机，其定子电流会飙升至额定值的 $5 \sim 7$ 倍，进而对供电网络及电机本体产生强烈的电流冲击。针对绕线式电机，采取在转子侧接入外部可调电阻的方案，能够大幅提升转子回路的等效阻值。
+			
+			依据电机机械特性方程可知，此举不仅能有效抑制启动电流，亦可显著提升初始电磁转矩，特别是在外接电阻促使临界转差率 $S_m \approx 1$ 的工况下，启动转矩可达峰值。此外，在电机处于稳态运转期间，通过调节转子外接电阻的大小，能够改变机械特性斯的刚度，进而达成改变转差率调速的目的。具体而言，在负载转矩恒定的前提下，串联阻值越高，电机稳态转速则越低。
+			
+			\begin{figure}[H] 
+				\centering
+				\includegraphics[width=\textwidth]{fig4-3.jpg}
+				\caption{\hspace{0.5em}三相绕线式异步电动机转子绕组串入可变电阻器启动实验接线图}
+			\end{figure}
+			
+			\subsection{三相绕线式异步电动机的空载工作特性}
+			电机的空载特性描述的是在转轴完全卸载，即机械输出功率 $P_2 = 0$ 的状态下，定子输入电压 $U_1$ 同空载电流 $I_0$、空载有功功率 $P_0$ 以及实际转速 $n$ 相互关联的变化轨迹。
+			借助该项测试，能够准确评估电机的励磁阻抗参数，并进一步剥离出铁耗与机械摩擦损耗。鉴于空载工况下的转差率 $S$ 微乎其微，转子转速极度贴近同步转速 $n_1$，此时定子侧汲取的电流绝大部分用于构建气隙旋转磁场，表现出强烈的感性无功特征，导致系统整体功率因数处于极低水平。
+			
+			\begin{figure}[H] 
+				\centering
+				\includegraphics[width=\textwidth]{fig4-6.jpg}
+				\caption{\hspace{0.5em}三相绕线式异步电动机工作特性实验接线图}
+			\end{figure}
+			
+			\subsection{三相绕线式异步电动机的负载工作特性}
+			负载特性旨在揭示当供电电压与频率均维持在额定标准，即 $U_1 = U_N$ 且 $f = f_N$ 时，电机的各项运行指标，包含定子电流 $I_1$、系统输入功率 $P_1$、转子转速 $n$、转差率 $S$、功率因数 $\cos\varphi$ 以及能量转换效率 $\eta$，伴随轴端输出功率 $P_2$ 增减而演变的内在规律。
+			在具体操作环节，利用直流他励发电机 G3 充当 M3 的机械阻力源，并依靠改变发电机侧的耗能电阻 $R_W$ 阻值，实现对异步电机机械负载轻重的平滑调节。
+			
+			\section{实验步骤和说明}
+			
+			\subsection{三相绕线式异步电动机转子串电阻启动与调速}
+			实验步骤：
+			\begin{enumerate}
+				\item 依照原理图完成电气连接，将三相可调电阻负载的控制开关悉数拨至零挡位，确保转子回路接入全部外加电阻。
+				\item 把三相调压器旋钮逆时针复位至零点，闭合主电源后，缓慢且平稳地提升调压器输出，直至电机定子端电压稳定在额定标准三百八十伏特。
+				\item 观测并如实登记当前阻值状态下的定子电压 $U$、定子电流 $I$ 以及电机转速 $n$。
+				\item 依次将负载电阻开关切换至一挡位、二挡位与三挡位，待系统运行平稳后，分别记录各状态对应的 $U$、$I$、$n$ 数值。
+			\end{enumerate}
+			
+			实验数据记录表：
+			\begin{table}[H]
+				\centering
+				\caption{\hspace{0.5em}表 4-3 绕线式异步电动机转子串入可变电阻启动实验数据}
+				\begin{tabular}{c|c|c|c|c|c|c}
+					\hline
+					序号 & 1 & 2 & 3 & 4 & 5 & 6 \\
+					\hline
+					$R/\Omega$ & \multicolumn{3}{|c|}{6(零挡)} & 3(一挡) & 1(二挡) & 0(三挡) \\
+					\hline
+					$U$/V & 228 & 304 & 380 & 380 & 380 & 380 \\
+					\hline
+					$I$/A & 1.41 & 1.95 & 2.64 & 2.64 & 2.66 & 2.67 \\
+					\hline
+					$N$/(r$\cdot$min$^{-1}$) & 809 & 856 & 923 & 957 & 973 & 982 \\
+					\hline
+				\end{tabular}
+			\end{table}
+			
+			\subsection{三相绕线式异步电动机空载特性实验}
+			实验步骤：
+			\begin{enumerate}
+				\item 维持发电机 G3 处于开路状态，即断开其负载侧开关，令异步电机处于纯空载运转模式。
+				\item 调节三相调压器使其输出达到最高值，或者约为额定电压的百分之一百一十，随后沿单一方向匀速降低输出电压。
+				\item 在降压进程中，均匀选取约六个观测节点，详细记录对应时刻的定子电压 $U$、空载电流 $I_0$ 及转速 $n$。
+			\end{enumerate}
+			
+			实验数据记录表：
+			\begin{table}[H]
+				\centering
+				\caption{\hspace{0.5em}表 4-7 三相绕线式异步电动机空载特性实验数据}
+				\begin{tabular}{c|c|c|c|c|c|c}
+					\hline
+					序号 & 1 & 2 & 3 & 4 & 5 & 6 \\
+					\hline
+					$U$/V & 100 & 150 & 200 & 250 & 300 & 380 \\
+					\hline
+					$I$/A & 0.860 & 1.060 & 1.384 & 1.732 & 2.128 & 2.932 \\
+					\hline
+					$N$/(r$\cdot$min$^{-1}$) & 857 & 932 & 960 & 972 & 979 & 986 \\
+					\hline
+				\end{tabular}
+			\end{table}
+			
+			\subsection{三相绕线式异步电动机负载特性实验}
+			实验步骤：
+			\begin{enumerate}
+				\item 设定三相调压器输出为电机额定电压三百八十伏特并保持恒定，同时为发电机 G3 施加额定励磁电流。
+				\item 逐步调低发电机侧的负载电阻 $R_W$，以此加重电机的机械负担，直至定子电流攀升至额定值的一点二倍上下。
+				\item 采取逐级断开负载开关的方式减轻负荷，在由过载向空载过渡的区间内，合理选取六个测试点。
+				\item 准确抄录异步电机的相电压 $U_1$、线电流 $I_1$、输入有功功率 $P_1$、转速 $n$，以及发电机端的输出电压 $U_F$ 与负载电流 $I_F$。
+			\end{enumerate}
+			
+			实验数据记录表：
+			\begin{table}[H]
+				\centering
+				\caption{\hspace{0.5em}表 4-8 负载实验测量数据}
+				\begin{tabular}{c|c|c|c|c|c|c|c}
+					\hline
+					\multicolumn{2}{c|}{序号} & 1 & 2 & 3 & 4 & 5 & 6 \\
+					\hline
+					\multicolumn{2}{c|}{记录点} & $I_F=4.35$A & $I_F=3$A & $R_W=\text{max}$ & $\text{SW}_3$断开 &$\text{SW}_2$断开 & $\text{SW}_1$断开\\
+					\hline
+					\multirow{4}{*}{\shortstack{异步电动\\机M3实\\验数据}} 
+					& $U_1$/V & 379 & 376.5 & 378 & 377.5 & 378.0 & 380 \\ \cline{2-8}
+					& $I_1$/A & 3.14 & 2.80 & 2.80 & 2.58 & 2.54 & 2.54 \\ \cline{2-8}
+					& $P_1$/W & 1300 & 950 & 790 & 596 & 400 & 304 \\ \cline{2-8}
+					& $n$/(r$\cdot$min$^{-1}$) & 915 & 940 & 951 & 965 & 979 & 987 \\
+					\hline
+					\multirow{2}{*}{\zihao{-5}\shortstack{直流发电\\机G3实\\验数据}} 
+					& $U_F$/V & 147.4 & 159.8 & 164.9 & 170.0 & 171.5 & 169.7 \\ \cline{2-8}
+					& $I_F$/A & 4.35 & 3.00 & 2.35 & 1.48 & 0.567 & 0 \\
+					\hline
+					\multirow{5}{*}{\shortstack{计算数据}}
+					& $P_F$/W & 641.19 & 479.40 & 387.52 & 251.60 & 97.24 & 0 \\ \cline{2-8}
+					& $\cos\varphi$ & 0.63 & 0.52 & 0.45 & 0.35 & 0.33 & 0.18 \\ \cline{2-8}
+					& $\eta$ & 49.3\% & 50.5\% & 49.1\% & 42.2\% & 24.3\% & 0 \\ \cline{2-8}
+					& $S$ & 0.085 & 0.060 & 0.049 & 0.035 & 0.021 & 0.013 \\ \cline{2-8}
+					& $P_2$/W & 0.913 & 0.675 & 0.553 & 0.387 & 0.197 & 0 \\
+					\hline
+				\end{tabular}
+			\end{table}
+			
+			\section{实验结果和结论}
+			\subsection{相关参数的计算公式}
+			针对负载特性测试环节，部分核心运行指标无法依靠仪表直读，必须基于实测数据展开推算：
+			\begin{itemize}
+				\item 转差率 $S$：依据公式 $S = \frac{n_1 - n}{n_1}$ 求解，式中四极电机的同步转速 $n_1 = 1500 \text{ r/min}$。
+				\item 功率因数 $\cos\varphi$：利用关系式 $\cos\varphi = \frac{P_1}{\sqrt{3} U_1 I_1}$ 获得，需留意电压与电流参数是否已统一为线制物理量。
+				\item 电机输出功率 $P_2$：鉴于采用发电机作为负载媒介，可借助经验公式 $P_2 = \eta_1 \frac{P_1}{1000}$ 估算，亦可由发电机实际输出功率逆向推导。
+				\item 电机效率 $\eta$：通过比值计算 $\eta = \frac{P_2}{P_1} \times 100\% $ 得出。
+			\end{itemize}
+			
+			\subsection{实验现象与特性分析}
+			完成数据整理并绘制出相应的特性曲线后，可归纳出如下物理规律：
+			\begin{enumerate}
+				\item 转子外接电阻调速机制剖析：伴随转子侧附加电阻的逐级切除，回路总阻抗不断收缩。在负载恒定或空载前提下，电机实际转速 $n$ 呈现稳步攀升态势，并逐渐向同步转速靠拢。该现象充分印证了调节转子电阻能够切实重塑电机的人为机械特性，进而达成平滑调速的目标。
+				\item 空载运行规律探讨：随着定子端电压 $U$ 的持续抬升，空载电流 $I_0$ 展现出非线性的增长轨迹。处于低压区间时，内部磁路尚未饱和，$I_0$ 随 $U$ 保持近似线性递增；一旦电压逼近乃至超越额定基准，铁芯磁化程度趋于饱和状态，维持磁场所需的励磁电流急剧膨胀，导致特性曲线的斜率显著陡增。
+				\item 负载响应特性解读：
+				\begin{itemize}
+					\item 转速 $n$ 与转差率 $S$：当轴端输出功率 $P_2$ 逐步放大时，为诱发充裕的电磁驱动转矩，转子导体必须以更高频率切割气隙磁场，这必然引发转速 $n$ 的轻微滑落，同时转差率 $S$ 表现出近似正比例的攀升。鉴于转速跌幅极为有限，此现象深刻体现了异步电机具备刚性极强的机械特性。
+					\item 定子电流 $I_1$：机械负荷的加重直接导致转子侧电流激增，基于变压器磁势平衡原理，定子绕组从电网汲取的电流 $I_1$ 亦同步放大。
+					\item 功率因数 $\cos\varphi$：在纯空载阶段，定子电流几乎全由无功性质的励磁分量构成，致使 $\cos\varphi$ 处于极低位，通常徘徊在零点二上下。随着有功负荷的注入，电流中的有功成分快速扩充，促使 $\cos\varphi$ 陡然拉升并最终趋于平稳；若电机步入深度过载区域，定子漏抗引发的内部压降加剧，将导致 $\cos\varphi$ 出现微弱的回落迹象。
+					\item 效率 $\eta$：空载状态下因无有效机械输出，系统效率归零。随着负载逐步加载，效率指标快速上扬；当系统内部的可变损耗即铜耗，与固定不变的铁耗及机械损耗达到数值均衡时，电机运行效率攀至顶峰；若继续盲目增加负载，呈平方级数暴增的铜耗将打破平衡，迫使效率曲线步入下行通道。
+				\end{itemize}
+			\end{enumerate}
+			
+		}
+	\end{framed}
+	
+\end{document}

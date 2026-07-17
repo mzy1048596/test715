@@ -1,0 +1,163 @@
+% 页面配置文件（中南大学实验报告模板 A4竖版有框）
+
+% A4竖版高度为29.7cm，宽度为21.0cm
+
+\documentclass[xiaosi]{ctexart}
+
+% --- 页面与布局设置 ---
+\usepackage[a4paper]{geometry}
+\geometry{
+	top=1.6cm, % 调整上边距
+	bottom=1.6cm, % 调整下边距
+	left=2.5cm, % 调整左边距
+	right=2.0cm % 调整右边距
+}
+\setlength{\parindent}{2em}
+
+% --- 字体设置 ---
+\usepackage{xeCJK}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+% 设置中文字体
+\setCJKmainfont{SimSun}      % 正文宋体
+\setCJKsansfont{SimHei}      % 无衬线黑体
+\setCJKmonofont{FangSong}    % 等宽仿宋 (可自行修改)
+\setmainfont{Times New Roman} % 设置英文字体
+\setmathfont{XITS Math} % 设置数学公式字体
+
+% --- 宏包引入 ---
+\usepackage{graphicx}       % 用于插入图片
+\usepackage{titlesec}       % 用于自定义标题格式
+\usepackage{zhnumber}       % 用于将数字转为中文序号
+\usepackage{amsmath}        % AMS数学公式宏包
+\usepackage{framed}         % 用于给正文加边框
+\usepackage{tikz}           % 用于绘制装订线
+\usepackage{eso-pic}        % 用于在页面固定位置放置内容
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{listings} % listings 宏包用于代码高亮
+\usepackage{xcolor} % xcolor 宏包用于设置代码颜色
+\usepackage{multirow}
+
+% --- 页面样式与路径设置 ---
+\pagestyle{empty} % 全文不显示页码
+\graphicspath{{./picture/}} % 设置图片都存放在./picture/文件夹内
+
+% --- 装订线设置 ---
+% 使用eso-pic和tikz在每一页的左侧绘制虚线和文字“装订线”
+\AddToShipoutPictureBG{
+	\AtPageLowerLeft{
+		\begin{tikzpicture}[remember picture, overlay]
+			% 装订线位于左页边距3cm的中间位置
+			\coordinate (start) at (1.25cm, 1.5cm); 
+			\coordinate (end) at (1.25cm, 28.2cm);
+			\draw[dashed] (start) -- (end);
+			\node[rotate=90, anchor=south, font=\small] at (1.25cm, 14.85cm)
+			{装\hspace{6em}订\hspace{6em}线};
+		\end{tikzpicture}
+	}
+}
+
+% --- 设置 listings 代码（代码块）样式 ---
+\lstset{
+	language=Python, % 设置默认语言为 Python
+	basicstyle=\ttfamily\zihao{-5}, % 字体为等宽字体 (Typewriter)，五号字
+	lineskip={0.5ex}, % 微调行间距，可根据效果调整
+	keywordstyle=\color{blue}\bfseries, % 关键字颜色为蓝色，加粗
+	commentstyle=\color[rgb]{0.0, 0.5, 0.0}\itshape, % 注释颜色为深绿，斜体
+	stringstyle=\color[rgb]{0.7, 0.0, 0.0}, % 字符串颜色为深红
+	showstringspaces=false, % 不显示字符串中的空格
+	frame=single, % 添加单线边框
+	framesep=5pt, % 边框与代码的间距
+	rulesepcolor=\color{gray}, % 边框线的颜色
+	backgroundcolor=\color[rgb]{0.95,0.95,0.95}, % 背景颜色为浅灰色
+	breaklines=true, % 自动断行
+	tabsize=4, % 制表符宽度
+	numbers=left, % 显示行号
+	xleftmargin=2em, % 代码框左侧留出2em空间
+	xrightmargin=2em % 代码框右侧留出2em空间
+}
+
+% --- 调整公式行间距---
+% 减小公式上方间距（长行）
+\setlength{\abovedisplayskip}{1pt plus 0.5pt minus 0.5pt}
+% 减小公式下方间距（长行）
+\setlength{\belowdisplayskip}{1pt plus 0.5pt minus 0.5pt}
+% 减小公式上方间距（短行）
+\setlength{\abovedisplayshortskip}{1pt plus 0.5pt minus 0.5pt}
+% 减小公式下方间距（短行）
+\setlength{\belowdisplayshortskip}{1pt plus 0.5pt minus 0.5pt}
+
+% --- 标题格式定义 ---
+% 一级标题 (例如: 一、实验目的)
+% 格式: 三号、黑体, 靠左, 缩进1个字符
+\renewcommand{\thesection}{\zhnum{section}}
+\titleformat{\section}
+{\normalfont\heiti\zihao{3}} % 字体格式
+{\thesection、}              % 标题编号
+{0em}                      % 编号与标题文字的间距
+{}                         % 标题前的代码
+\titlespacing*{\section}
+{1em}   % 左边距 (缩进1字符)
+{3ex}    % 标题前间距
+{2ex}    % 标题后间距
+
+% 二级标题
+% 格式: 小四、黑体, 靠左, 缩进2个字符, 需要编号
+\renewcommand{\thesubsection}{（\zhnum{subsection}）}
+\titleformat{\subsection}
+{\normalfont\heiti\zihao{-4}}
+{\thesubsection}
+{0em}
+{}
+\titlespacing*{\subsection}{2em} {0.5ex} {0.5ex}
+
+% 三级标题
+% 格式: 小四、楷体, 靠左, 缩进2个字符, 需要编号
+\titleformat{\subsubsection}
+{\normalfont\kaishu\zihao{-4}}
+{\thesubsubsection}
+{1em}
+{}
+\titlespacing*{\subsubsection}{2em} {0ex} {0ex}
+
+% --- 图表标题设置 ---
+\captionsetup[figure]
+{
+	font={small},
+	labelsep=space,
+	name={图},
+	position=below,
+	skip=5pt
+}
+\captionsetup[table]
+{
+	font={small},
+	labelsep=space,
+	name={表},
+	position=above,
+	skip=3pt
+}
+
+% --- 多级列表设置 ---
+\usepackage{enumitem} % 引入列表控制宏包
+\setlist[enumerate, 1]{ % 有序列表
+	topsep=0pt,
+	partopsep=0pt, % 设置列表和周围文字的间距为0
+	itemsep=0pt, % 设置列表项之间的间距为0
+	parsep=0pt, % 设置列表项内段落之间的间距
+	labelsep=0.5em,	% 调整列表项的标签与文本的间距使其看起来更自然
+	leftmargin=3.5em % enumerate列表缩进3.5em
+}
+\setlist[itemize, 1]{ % 无序列表
+	label={·},
+	topsep=0pt,
+	partopsep=0pt, % 设置列表和周围文字的间距为0
+	itemsep=0pt, % 设置列表项之间的间距为0
+	parsep=0pt, % 设置列表项内段落之间的间距
+	labelsep=0em, % 调整列表项的标签与文本的间距使其看起来更自然
+	leftmargin=1em % itemize列表缩进1em
+}
